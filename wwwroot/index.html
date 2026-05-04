@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus - Hello World</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Work+Sans:wght@400;500;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary-container": "#e2e2e2",
+                "on-tertiary-container": "#bb181e",
+                "on-surface-variant": "#4d4732",
+                "error": "#ba1a1a",
+                "surface": "#f9f9f9",
+                "error-container": "#ffdad6",
+                "surface-container-highest": "#e2e2e2",
+                "primary": "#705d00",
+                "on-error-container": "#93000a",
+                "surface-variant": "#e2e2e2",
+                "surface-container": "#eeeeee",
+                "outline-variant": "#d0c6ab",
+                "surface-container-low": "#f3f3f3",
+                "on-primary-container": "#705e00",
+                "on-surface": "#1a1c1c",
+                "on-tertiary-fixed-variant": "#93000e",
+                "on-primary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "surface-dim": "#dadada",
+                "on-secondary-fixed": "#1b1b1b",
+                "secondary-fixed-dim": "#c6c6c6",
+                "on-secondary-container": "#646464",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-fixed": "#ffdad6",
+                "tertiary-fixed-dim": "#ffb4ac",
+                "inverse-primary": "#e9c400",
+                "inverse-on-surface": "#f1f1f1",
+                "on-background": "#1a1c1c",
+                "tertiary": "#bb171d",
+                "surface-container-high": "#e8e8e8",
+                "on-error": "#ffffff",
+                "secondary": "#5e5e5e",
+                "primary-fixed": "#ffe16d",
+                "surface-tint": "#705d00",
+                "primary-container": "#ffd700",
+                "on-primary-fixed": "#221b00",
+                "primary-fixed-dim": "#e9c400",
+                "tertiary-container": "#ffcec9",
+                "background": "#f9f9f9",
+                "surface-bright": "#f9f9f9",
+                "inverse-surface": "#2f3131",
+                "on-tertiary-fixed": "#410003",
+                "secondary-fixed": "#e2e2e2",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed-variant": "#474747",
+                "on-primary-fixed-variant": "#544600",
+                "outline": "#7e775f"
+            },
+            "borderRadius": {
+                "DEFAULT": "0px",
+                "lg": "0px",
+                "xl": "0px",
+                "full": "9999px"
+            },
+            "spacing": {
+                "grid-margin": "32px",
+                "base": "4px",
+                "md": "24px",
+                "sm": "16px",
+                "lg": "40px",
+                "xl": "64px",
+                "grid-gutter": "0px",
+                "xs": "8px"
+            },
+            "fontFamily": {
+                "label-mono": ["Space Grotesk"],
+                "label-bold": ["Space Grotesk"],
+                "display-lg": ["Epilogue"],
+                "body-lg": ["Work Sans"],
+                "body-md": ["Work Sans"],
+                "headline-md": ["Epilogue"],
+                "headline-lg": ["Epilogue"]
+            },
+            "fontSize": {
+                "label-mono": ["0.75rem", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "label-bold": ["0.875rem", {"lineHeight": "1.0", "fontWeight": "700"}],
+                "display-lg": ["4.5rem", {"lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900"}],
+                "body-lg": ["1.125rem", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "body-md": ["1rem", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "headline-md": ["1.5rem", {"lineHeight": "1.3", "fontWeight": "700"}],
+                "headline-lg": ["2.25rem", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #f9f9f9;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .waffle-border {
+            border: 4px solid #1a1c1c;
+        }
+        .waffle-shadow {
+            box-shadow: 8px 8px 0px 0px #1a1c1c;
+        }
+        .waffle-shadow-small {
+            box-shadow: 4px 4px 0px 0px #1a1c1c;
+        }
+    </style>
+</head>
+<body class="bg-background selection:bg-primary-container selection:text-on-background">
+<!-- TopNavBar Component -->
+<nav class="fixed top-0 w-full z-50 bg-primary-container border-b-4 border-on-background">
+<div class="max-w-[1200px] mx-auto px-8 flex justify-between items-center h-20">
+<div class="flex items-center gap-2">
+<span class="text-3xl font-black uppercase tracking-tighter text-on-background font-display-lg bg-on-background text-primary-container px-3 py-1">Nexus</span>
+</div>
+<div class="hidden md:flex items-center gap-8 font-label-bold">
+<a class="text-on-background border-b-4 border-on-background pb-1 uppercase" href="#">Features</a>
+<a class="text-on-background hover:opacity-70 transition-opacity uppercase" href="#">About</a>
+<a class="text-on-background hover:opacity-70 transition-opacity uppercase" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-on-background text-primary-container px-6 py-2 waffle-border font-label-bold uppercase waffle-shadow-small active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
+                Get Started
+            </button>
+</div>
+</div>
+</nav>
+<!-- Main Content (The Canvas) -->
+<main class="min-h-screen flex items-center justify-center pt-32 pb-24 px-8">
+<div class="max-w-[1200px] w-full flex justify-center">
+<!-- Re-imagined Centered Card: "Featured Special" -->
+<section class="w-full max-w-2xl bg-surface-container-lowest waffle-border waffle-shadow p-12 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-on-tertiary-container text-on-tertiary px-6 py-2 font-label-bold uppercase waffle-border border-t-0 border-r-0">
+                Today's Special
+            </div>
+<div class="mb-sm flex justify-center">
+<div class="w-24 h-24 bg-primary-container waffle-border flex items-center justify-center text-on-background mb-6">
+<span class="material-symbols-outlined text-5xl" data-icon="language">language</span>
+</div>
+</div>
+<h1 class="font-display-lg text-headline-lg uppercase text-on-background mb-sm leading-none italic">
+                Hello World
+            </h1>
+<p class="font-body-lg text-on-surface-variant mb-lg max-w-lg mx-auto font-medium">
+                Welcome to Nexus, where cutting-edge design meets effortless efficiency. This is a minimalist launchpad designed to showcase the power of intentional UI.
+            </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<button class="w-full sm:w-auto bg-primary-container text-on-background px-10 py-5 waffle-border font-label-bold uppercase text-lg waffle-shadow-small active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
+                    Explore Dashboard
+                </button>
+<button class="w-full sm:w-auto bg-surface-container-low text-on-surface px-10 py-5 waffle-border font-label-bold uppercase text-lg hover:bg-surface-container-high transition-colors">
+                    Documentation
+                </button>
+</div>
+<!-- Abstract Decorative Image -->
+<div class="mt-xl waffle-border overflow-hidden h-56 w-full relative">
+<img alt="Nexus Vision" class="w-full h-full object-cover grayscale contrast-125" data-alt="A high-end cinematic visualization of a digital network with glowing indigo and violet light trails flowing through a deep blue technological space. The scene is clean and minimalist, featuring soft bokeh lighting that creates a sophisticated tech-driven atmosphere. The style is premium and corporate modern, reflecting a sense of global connectivity and advanced data processing in a bright, light-mode context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXOuHYGz0A0GhZqyeV_KX4Sljp6PHtTYFhgVmfDuby0-xLjgUa9FBku_eVvmAaaLe7kFDbiJzNbfs0kwHETBc3DA8otmamPQvW2xUlRV1XJG-iJMK3vat41GLzl2MPR1kRCza-TAWuYLoDbRYLUq_hTCWaROawB0eo91Rc6IVnJ9scNN7dAaHZfYUo-oLOIzZk1-WF8w5N5-SY2Cz8s77Y2Gd59DWAbVMptAEh6MYVtQ_bw2xuRiUhlSksxU0-zrsQCbkSxuUZKIz6"/>
+<div class="absolute inset-0 bg-primary-container/20 mix-blend-multiply pointer-events-none"></div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="w-full py-12 bg-surface-container border-t-4 border-on-background">
+<div class="max-w-[1200px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-2xl font-black uppercase tracking-tighter text-on-background font-display-lg bg-on-background text-primary-container px-2">Nexus</span>
+<p class="font-label-mono text-xs text-on-surface-variant uppercase">© 2024 Nexus Inc. Good Food. Fast Code.</p>
+</div>
+<div class="flex items-center gap-8 font-label-bold uppercase text-xs">
+<a class="text-on-background hover:underline decoration-4" href="#">Privacy Policy</a>
+<a class="text-on-background hover:underline decoration-4" href="#">Terms of Service</a>
+<a class="text-on-background hover:underline decoration-4" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+</body></html>
