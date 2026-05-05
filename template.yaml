@@ -115,6 +115,17 @@ Resources:
       PublicAccessBlockConfiguration:
         IgnorePublicAcls: true
         RestrictPublicBuckets: true
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - PUT
+              - POST
+              - GET
+              - DELETE
+            AllowedOrigins:
+              - '*'
   InboxBucketBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -172,6 +183,162 @@ Resources:
     DeletionPolicy: Retain
     Properties:
       LogGroupName: !Sub /aws/lambda/${LInbox}
+  JobsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${AWS::StackName}-jobs
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: jobId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: jobId
+          KeyType: HASH
+  LSubmit:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: !Sub
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: LSubmit
+      CodeUri: src/LSubmit
+      Handler: lsubmit_handler.handler
+      Runtime: python3.13
+      Role: !Ref LabRoleArn
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Environment:
+        Variables:
+          JOB_TABLE: !Ref JobsTable
+          STATE_MACHINE_ARN: !Ref StateMachine
+      Events:
+        SubmitAPI:
+          Type: Api
+          Properties:
+            Path: /api/jobs
+            Method: post
+            RestApiId: !Ref Api
+  LSubmitLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${LSubmit}
+  L1Fetch:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: !Sub
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: L1Fetch
+      CodeUri: src/state_machine
+      Handler: l1fetch.handler
+      Runtime: python3.13
+      Role: !Ref LabRoleArn
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref InboxBucket
+  L1FetchLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${L1Fetch}
+  L2Call:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: !Sub
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: L2Call
+      CodeUri: src/state_machine
+      Handler: l2call.handler
+      Runtime: python3.13
+      Role: !Ref LabRoleArn
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Environment:
+        Variables:
+          JOB_TABLE: !Ref JobsTable
+  L2CallLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${L2Call}
+  L3Save:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: !Sub
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: L3Save
+      CodeUri: src/state_machine
+      Handler: l3save.handler
+      Runtime: python3.13
+      Role: !Ref LabRoleArn
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Environment:
+        Variables:
+          JOB_TABLE: !Ref JobsTable
+          DB_ARN: ''
+          DB_SECRET: ''
+          DB_NAME: ''
+  L3SaveLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${L3Save}
+  StateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Role: !Ref LabRoleArn
+      DefinitionSubstitutions:
+        L1FetchArn: !GetAtt L1Fetch.Arn
+        L2CallArn: !GetAtt L2Call.Arn
+        L3SaveArn: !GetAtt L3Save.Arn
+      Definition:
+        StartAt: FetchImage
+        States:
+          FetchImage:
+            Type: Task
+            Resource: arn:aws:states:::lambda:invoke
+            Parameters:
+              FunctionName: ${L1FetchArn}
+              Payload:
+                jobId.$: $.jobId
+                filename.$: $.filename
+            ResultSelector:
+              jobId.$: $.Payload.jobId
+              filename.$: $.Payload.filename
+              bucket.$: $.Payload.bucket
+            Next: CallTextract
+          CallTextract:
+            Type: Task
+            Resource: arn:aws:states:::lambda:invoke
+            Parameters:
+              FunctionName: ${L2CallArn}
+              Payload:
+                jobId.$: $.jobId
+                filename.$: $.filename
+                bucket.$: $.bucket
+            ResultSelector:
+              jobId.$: $.Payload.jobId
+              items.$: $.Payload.items
+            Next: SaveResults
+          SaveResults:
+            Type: Task
+            Resource: arn:aws:states:::lambda:invoke
+            Parameters:
+              FunctionName: ${L3SaveArn}
+              Payload:
+                jobId.$: $.jobId
+                items.$: $.items
+            End: true
 Outputs:
   HealthApi:
     Description: 'API Gateway endpoint URL for Prod:'

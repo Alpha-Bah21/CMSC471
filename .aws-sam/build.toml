@@ -27,4 +27,22 @@ manifest_hash = "d41d8cd98f00b204e9800998ecf8427e"
 packagetype = "Zip"
 functions = ["LInbox"]
 
+[function_build_definitions.275a0033-ebf5-477b-9de3-01cd1687ebdf]
+codeuri = "C:\\Project\\CMSC471\\src\\LSubmit"
+runtime = "python3.13"
+architecture = "x86_64"
+handler = "lsubmit_handler.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["LSubmit"]
+
+[function_build_definitions.f73e6c76-244e-4720-a8f6-9d45c97e5939]
+codeuri = "C:\\Project\\CMSC471\\src\\state_machine"
+runtime = "python3.13"
+architecture = "x86_64"
+handler = "l1fetch.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["L1Fetch", "L2Call", "L3Save"]
+
 [layer_build_definitions]

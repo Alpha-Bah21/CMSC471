@@ -1,8 +1,10 @@
 import json
 import boto3
 import os
+from urllib.parse import unquote_plus
+from botocore.config import Config
 
-s3 = boto3.client('s3')
+s3 = boto3.client('s3', config=Config(signature_version='s3v4'))
 bucket = os.environ['InboxBucketName']
 
 def handler(event, context):
@@ -19,16 +21,23 @@ def handler(event, context):
 
     elif method == 'POST':
         body = json.loads(event['body'])
-        filename = body['filename']
-        s3.put_object(Bucket=bucket, Key=filename, ContentType='image/png')
+        filename = body['file_name']
+        url = s3.generate_presigned_url(
+            'put_object',
+            Params={
+                'Bucket': bucket,
+                'Key': filename
+            },
+            ExpiresIn=300
+        )
         return {
             "statusCode": 200,
             "headers": {"Access-Control-Allow-Origin": "*"},
-            "body": json.dumps(filename)
+            "body": json.dumps({"url": url})
         }
 
     elif method == 'DELETE':
-        key = event['pathParameters']['key']
+        key = unquote_plus(event['pathParameters']['key'])
         s3.delete_object(Bucket=bucket, Key=key)
         return {
             "statusCode": 200,
