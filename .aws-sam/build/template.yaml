@@ -266,6 +266,42 @@ Resources:
     Properties:
       LogGroupName:
         Fn::Sub: /aws/lambda/${LSubmit}
+  LPoll:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description:
+        Fn::Sub:
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: LPoll
+      CodeUri: LPoll
+      Handler: l_poll.handler
+      Runtime: python3.13
+      Role:
+        Ref: LabRoleArn
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Environment:
+        Variables:
+          JOB_TABLE:
+            Ref: JobsTable
+      Events:
+        PollAPI:
+          Type: Api
+          Properties:
+            Path: /api/jobs/{jobId}
+            Method: get
+            RestApiId:
+              Ref: Api
+    Metadata:
+      SamResourceId: LPoll
+  LPollLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      LogGroupName:
+        Fn::Sub: /aws/lambda/${LPoll}
   L1Fetch:
     Type: AWS::Serverless::Function
     Properties:

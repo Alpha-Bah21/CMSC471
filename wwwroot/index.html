@@ -392,7 +392,47 @@ p.innerText = '> [' + new Date().toLocaleString() + '] SYSTEM INITIALIZED';
 log.appendChild(p);
 
 // Load inbox on page load
+// Load inbox and records on page load
 loadInbox();
+loadRecords();
+
+async function loadRecords() {
+    const res = await fetch(`${API}/api/records`);
+    const rows = await res.json();
+    renderRecords(rows);
+}
+
+function renderRecords(rows) {
+    const tbody = document.querySelector('#recordsTable tbody');
+    tbody.innerHTML = '';
+
+    if (rows.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="3" class="py-6 text-center italic text-sm text-gray-500">
+                    No records yet. Process an image to see results.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    rows.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="py-3 text-green-400">${row.time || ''}</td>
+            <td class="py-3 text-right">
+                <button onclick="deleteRecord('${row.id}')" class="text-red-400 hover:text-red-200 transition">close</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+async function deleteRecord(id) {
+    await fetch(`${API}/api/records/${id}`, { method: 'DELETE' });
+    loadRecords();
+}
 </script>
 
 </body>

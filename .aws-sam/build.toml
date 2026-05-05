@@ -45,4 +45,13 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["L1Fetch", "L2Call", "L3Save"]
 
+[function_build_definitions.47c59960-3085-4735-8e21-39919466d866]
+codeuri = "C:\\Project\\CMSC471\\src\\l_poll"
+runtime = "python3.13"
+architecture = "x86_64"
+handler = "l_poll.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["LPoll"]
+
 [layer_build_definitions]
