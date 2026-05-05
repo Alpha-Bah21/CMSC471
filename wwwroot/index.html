@@ -1,189 +1,341 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
+<html class="dark" lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Nexus - Hello World</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Work+Sans:wght@400;500;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Epilogue:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                "secondary-container": "#e2e2e2",
-                "on-tertiary-container": "#bb181e",
-                "on-surface-variant": "#4d4732",
-                "error": "#ba1a1a",
-                "surface": "#f9f9f9",
-                "error-container": "#ffdad6",
-                "surface-container-highest": "#e2e2e2",
-                "primary": "#705d00",
-                "on-error-container": "#93000a",
-                "surface-variant": "#e2e2e2",
-                "surface-container": "#eeeeee",
-                "outline-variant": "#d0c6ab",
-                "surface-container-low": "#f3f3f3",
-                "on-primary-container": "#705e00",
-                "on-surface": "#1a1c1c",
-                "on-tertiary-fixed-variant": "#93000e",
-                "on-primary": "#ffffff",
-                "on-secondary": "#ffffff",
-                "surface-dim": "#dadada",
-                "on-secondary-fixed": "#1b1b1b",
-                "secondary-fixed-dim": "#c6c6c6",
-                "on-secondary-container": "#646464",
-                "surface-container-lowest": "#ffffff",
-                "tertiary-fixed": "#ffdad6",
-                "tertiary-fixed-dim": "#ffb4ac",
-                "inverse-primary": "#e9c400",
-                "inverse-on-surface": "#f1f1f1",
-                "on-background": "#1a1c1c",
-                "tertiary": "#bb171d",
-                "surface-container-high": "#e8e8e8",
-                "on-error": "#ffffff",
-                "secondary": "#5e5e5e",
-                "primary-fixed": "#ffe16d",
-                "surface-tint": "#705d00",
-                "primary-container": "#ffd700",
-                "on-primary-fixed": "#221b00",
-                "primary-fixed-dim": "#e9c400",
-                "tertiary-container": "#ffcec9",
-                "background": "#f9f9f9",
-                "surface-bright": "#f9f9f9",
-                "inverse-surface": "#2f3131",
-                "on-tertiary-fixed": "#410003",
-                "secondary-fixed": "#e2e2e2",
-                "on-tertiary": "#ffffff",
-                "on-secondary-fixed-variant": "#474747",
-                "on-primary-fixed-variant": "#544600",
-                "outline": "#7e775f"
-            },
-            "borderRadius": {
-                "DEFAULT": "0px",
-                "lg": "0px",
-                "xl": "0px",
-                "full": "9999px"
-            },
-            "spacing": {
-                "grid-margin": "32px",
-                "base": "4px",
-                "md": "24px",
-                "sm": "16px",
-                "lg": "40px",
-                "xl": "64px",
-                "grid-gutter": "0px",
-                "xs": "8px"
-            },
-            "fontFamily": {
-                "label-mono": ["Space Grotesk"],
-                "label-bold": ["Space Grotesk"],
-                "display-lg": ["Epilogue"],
-                "body-lg": ["Work Sans"],
-                "body-md": ["Work Sans"],
-                "headline-md": ["Epilogue"],
-                "headline-lg": ["Epilogue"]
-            },
-            "fontSize": {
-                "label-mono": ["0.75rem", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
-                "label-bold": ["0.875rem", {"lineHeight": "1.0", "fontWeight": "700"}],
-                "display-lg": ["4.5rem", {"lineHeight": "1.0", "letterSpacing": "-0.04em", "fontWeight": "900"}],
-                "body-lg": ["1.125rem", {"lineHeight": "1.6", "fontWeight": "400"}],
-                "body-md": ["1rem", {"lineHeight": "1.5", "fontWeight": "400"}],
-                "headline-md": ["1.5rem", {"lineHeight": "1.3", "fontWeight": "700"}],
-                "headline-lg": ["2.25rem", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
-            }
-          },
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "outline-variant": "#4d4732",
+          "on-tertiary-container": "#b22e00",
+          "on-secondary-fixed": "#1d1d03",
+          "tertiary-fixed-dim": "#ffb5a0",
+          "surface-container": "#1f1f1f",
+          "on-secondary": "#323214",
+          "secondary": "#cac99f",
+          "on-tertiary": "#601400",
+          "on-error-container": "#ffdad6",
+          "tertiary-fixed": "#ffdbd1",
+          "secondary-fixed-dim": "#cac99f",
+          "on-primary-fixed-variant": "#544600",
+          "on-background": "#e2e2e2",
+          "on-secondary-fixed-variant": "#484828",
+          "error-container": "#93000a",
+          "secondary-fixed": "#e6e5b9",
+          "on-surface": "#e2e2e2",
+          "inverse-on-surface": "#303030",
+          "surface-container-lowest": "#0e0e0e",
+          "on-primary-fixed": "#221b00",
+          "primary-fixed": "#ffe16d",
+          "on-tertiary-fixed": "#3b0900",
+          "on-tertiary-fixed-variant": "#872000",
+          "on-surface-variant": "#d0c6ab",
+          "on-secondary-container": "#bcbb91",
+          "primary": "#fff6df",
+          "surface-variant": "#353535",
+          "surface-container-low": "#1b1b1b",
+          "on-error": "#690005",
+          "surface-container-high": "#2a2a2a",
+          "surface-bright": "#393939",
+          "inverse-primary": "#705d00",
+          "surface-tint": "#e9c400",
+          "surface-container-highest": "#353535",
+          "on-primary": "#3a3000",
+          "secondary-container": "#4b4b2a",
+          "outline": "#999077",
+          "on-primary-container": "#705e00",
+          "inverse-surface": "#e2e2e2",
+          "background": "#131313",
+          "tertiary-container": "#ffcfc2",
+          "primary-container": "#ffd700",
+          "surface-dim": "#131313",
+          "surface": "#131313",
+          "primary-fixed-dim": "#e9c400",
+          "tertiary": "#fff4f1",
+          "error": "#ffb4ab"
         },
-      }
-    </script>
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "fontFamily": {
+          "headline-md": ["Space Grotesk"],
+          "headline-xl": ["Space Grotesk"],
+          "label-bold": ["Space Grotesk"],
+          "body-md": ["Epilogue"],
+          "body-lg": ["Epilogue"],
+          "headline-lg": ["Space Grotesk"],
+          "mono": ["JetBrains Mono"]
+        },
+        "fontSize": {
+          "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+          "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "label-bold": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700"}],
+          "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "headline-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+        }
+      },
+    },
+  }
+</script>
 <style>
-        body {
-            font-family: 'Work Sans', sans-serif;
-            background-color: #f9f9f9;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .waffle-border {
-            border: 4px solid #1a1c1c;
-        }
-        .waffle-shadow {
-            box-shadow: 8px 8px 0px 0px #1a1c1c;
-        }
-        .waffle-shadow-small {
-            box-shadow: 4px 4px 0px 0px #1a1c1c;
-        }
-    </style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .retro-glow {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  }
+  .marquee-scroll {
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+  }
+</style>
 </head>
-<body class="bg-background selection:bg-primary-container selection:text-on-background">
-<!-- TopNavBar Component -->
-<nav class="fixed top-0 w-full z-50 bg-primary-container border-b-4 border-on-background">
-<div class="max-w-[1200px] mx-auto px-8 flex justify-between items-center h-20">
-<div class="flex items-center gap-2">
-<span class="text-3xl font-black uppercase tracking-tighter text-on-background font-display-lg bg-on-background text-primary-container px-3 py-1">Nexus</span>
-</div>
-<div class="hidden md:flex items-center gap-8 font-label-bold">
-<a class="text-on-background border-b-4 border-on-background pb-1 uppercase" href="#">Features</a>
-<a class="text-on-background hover:opacity-70 transition-opacity uppercase" href="#">About</a>
-<a class="text-on-background hover:opacity-70 transition-opacity uppercase" href="#">Contact</a>
-</div>
-<div class="flex items-center gap-4">
-<button class="bg-on-background text-primary-container px-6 py-2 waffle-border font-label-bold uppercase waffle-shadow-small active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
-                Get Started
-            </button>
-</div>
-</div>
-</nav>
-<!-- Main Content (The Canvas) -->
-<main class="min-h-screen flex items-center justify-center pt-32 pb-24 px-8">
-<div class="max-w-[1200px] w-full flex justify-center">
-<!-- Re-imagined Centered Card: "Featured Special" -->
-<section class="w-full max-w-2xl bg-surface-container-lowest waffle-border waffle-shadow p-12 text-center relative overflow-hidden">
-<div class="absolute top-0 right-0 bg-on-tertiary-container text-on-tertiary px-6 py-2 font-label-bold uppercase waffle-border border-t-0 border-r-0">
-                Today's Special
-            </div>
-<div class="mb-sm flex justify-center">
-<div class="w-24 h-24 bg-primary-container waffle-border flex items-center justify-center text-on-background mb-6">
-<span class="material-symbols-outlined text-5xl" data-icon="language">language</span>
-</div>
-</div>
-<h1 class="font-display-lg text-headline-lg uppercase text-on-background mb-sm leading-none italic">
-                Hello World
-            </h1>
-<p class="font-body-lg text-on-surface-variant mb-lg max-w-lg mx-auto font-medium">
-                Welcome to Nexus, where cutting-edge design meets effortless efficiency. This is a minimalist launchpad designed to showcase the power of intentional UI.
-            </p>
-<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-<button class="w-full sm:w-auto bg-primary-container text-on-background px-10 py-5 waffle-border font-label-bold uppercase text-lg waffle-shadow-small active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
-                    Explore Dashboard
-                </button>
-<button class="w-full sm:w-auto bg-surface-container-low text-on-surface px-10 py-5 waffle-border font-label-bold uppercase text-lg hover:bg-surface-container-high transition-colors">
-                    Documentation
-                </button>
-</div>
-<!-- Abstract Decorative Image -->
-<div class="mt-xl waffle-border overflow-hidden h-56 w-full relative">
-<img alt="Nexus Vision" class="w-full h-full object-cover grayscale contrast-125" data-alt="A high-end cinematic visualization of a digital network with glowing indigo and violet light trails flowing through a deep blue technological space. The scene is clean and minimalist, featuring soft bokeh lighting that creates a sophisticated tech-driven atmosphere. The style is premium and corporate modern, reflecting a sense of global connectivity and advanced data processing in a bright, light-mode context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXOuHYGz0A0GhZqyeV_KX4Sljp6PHtTYFhgVmfDuby0-xLjgUa9FBku_eVvmAaaLe7kFDbiJzNbfs0kwHETBc3DA8otmamPQvW2xUlRV1XJG-iJMK3vat41GLzl2MPR1kRCza-TAWuYLoDbRYLUq_hTCWaROawB0eo91Rc6IVnJ9scNN7dAaHZfYUo-oLOIzZk1-WF8w5N5-SY2Cz8s77Y2Gd59DWAbVMptAEh6MYVtQ_bw2xuRiUhlSksxU0-zrsQCbkSxuUZKIz6"/>
-<div class="absolute inset-0 bg-primary-container/20 mix-blend-multiply pointer-events-none"></div>
-</div>
-</section>
-</div>
+<body class="bg-black text-on-surface font-body-md min-h-screen flex flex-col">
+
+<!-- TopAppBar -->
+<header class="bg-black text-yellow-400 font-['Space_Grotesk'] uppercase tracking-widest font-bold docked full-width top-0 border-b-4 border-yellow-400 z-50 flex justify-between items-center px-8 py-4 w-full">
+  <div class="text-2xl font-black text-yellow-400 tracking-tighter italic">YELLOW SIGN DINER</div>
+  <nav class="hidden md:flex gap-8 items-center">
+    <a class="text-black bg-yellow-400 px-2 transition-colors duration-100" href="#">DASHBOARD</a>
+    <a class="text-yellow-400 hover:bg-yellow-400/10 transition-colors duration-100" href="#">RECORDS</a>
+    <a class="text-yellow-400 hover:bg-yellow-400/10 transition-colors duration-100" href="#">SYSTEM</a>
+  </nav>
+  <div class="flex items-center gap-4">
+    <span class="material-symbols-outlined cursor-pointer hover:bg-yellow-400 hover:text-black p-1 transition-colors duration-100">settings</span>
+    <span class="material-symbols-outlined cursor-pointer hover:bg-yellow-400 hover:text-black p-1 transition-colors duration-100">notifications</span>
+  </div>
+</header>
+
+<!-- SideNavBar -->
+<aside class="bg-black text-yellow-400 font-['Space_Grotesk'] font-bold text-xs fixed left-0 top-0 h-full flex flex-col pt-24 z-40 w-20 border-r-4 border-yellow-400">
+  <div class="mb-8 flex flex-col items-center">
+    <span class="text-yellow-400 font-bold block">STATION_04</span>
+    <span class="text-[8px] opacity-70">OPERATIONAL</span>
+  </div>
+  <div class="flex flex-col flex-1">
+    <a class="text-yellow-400 w-full flex flex-col items-center py-4 border-b-2 border-yellow-400/30 hover:bg-yellow-900/20 active:scale-90" href="#">
+      <span class="material-symbols-outlined">inbox</span>
+      <span class="mt-1">INBOX</span>
+    </a>
+    <a class="bg-yellow-400 text-black w-full flex flex-col items-center py-4 active:scale-90" href="#">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings_input_component</span>
+      <span class="mt-1">PROCESSOR</span>
+    </a>
+    <a class="text-yellow-400 w-full flex flex-col items-center py-4 border-b-2 border-yellow-400/30 hover:bg-yellow-900/20 active:scale-90" href="#">
+      <span class="material-symbols-outlined">database</span>
+      <span class="mt-1">RECORDS</span>
+    </a>
+    <a class="text-yellow-400 w-full flex flex-col items-center py-4 border-b-2 border-yellow-400/30 hover:bg-yellow-900/20 active:scale-90" href="#">
+      <span class="material-symbols-outlined">terminal</span>
+      <span class="mt-1">TERMINAL</span>
+    </a>
+  </div>
+</aside>
+
+<!-- Main Dashboard Content -->
+<main class="flex-1 ml-20 mt-4 mb-10 px-8 pb-12 overflow-y-auto">
+
+  <!-- Marquee Announcement -->
+  <section class="border-4 border-yellow-400 bg-black p-2 mb-8 mt-20 marquee-scroll">
+    <div class="font-headline-md font-bold text-yellow-400 uppercase tracking-tighter flex gap-20">
+      <span>SYSTEM STATUS: OPTIMAL</span>
+      <span>// WARNING: HIGH PACKET VOLUME DETECTED</span>
+      <span>// STATION 04 ONLINE</span>
+      <span>// SHIFT: MIDNIGHT SURGE</span>
+      <span>SYSTEM STATUS: OPTIMAL</span>
+    </div>
+  </section>
+
+  <!-- Three Column Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 h-fit">
+
+    <!-- Left Column: Inbox Table -->
+    <section class="lg:col-span-3 border-2 border-yellow-400 p-0 flex flex-col h-[500px]">
+      <div class="bg-yellow-400 text-black p-2 font-headline-md text-sm font-black uppercase tracking-widest flex items-center gap-2">
+        <span class="material-symbols-outlined">move_to_inbox</span>
+        INBOX
+        <button id="uploadButton" class="ml-auto bg-black text-yellow-400 border border-yellow-400 px-2 py-1 text-xs hover:bg-yellow-400 hover:text-black transition-colors">UPLOAD</button>
+      </div>
+      <div class="flex-1 overflow-auto p-4">
+        <table class="w-full text-left text-xs font-mono text-primary">
+          <thead>
+            <tr class="border-b-2 border-yellow-400/30 text-yellow-400">
+              <th class="pb-2">FILE</th>
+              <th class="pb-2">ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="inboxList" class="divide-y divide-yellow-400/10">
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Center Column: Process Area -->
+    <section class="lg:col-span-6 border-2 border-yellow-400 flex flex-col h-[500px] relative">
+      <div class="bg-black p-8 flex flex-col items-center justify-center h-full text-center">
+        <div class="mb-12 w-full max-w-md">
+          <div class="flex justify-between mb-4 font-label-bold text-yellow-400">
+            <span>RECEPTION</span>
+            <span>VALIDATION</span>
+            <span>ENCRYPTION</span>
+          </div>
+          <div class="h-4 w-full bg-black border-2 border-yellow-400 p-0.5">
+            <div class="h-full bg-yellow-400 w-2/3 shadow-[0_0_10px_#ffd700]"></div>
+          </div>
+          <div class="mt-2 text-right font-mono text-[10px] text-yellow-200 italic">STEP 2 OF 3: PROCESSING...</div>
+        </div>
+        <div class="relative group">
+          <div class="absolute inset-0 bg-yellow-400 blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+          <button id="processButton" class="relative bg-yellow-400 text-black px-16 py-8 font-headline-md text-xl font-black border-4 border-black hover:scale-105 active:scale-95 transition-transform retro-glow">
+            PROCESS
+          </button>
+        </div>
+        <div class="mt-12 w-full grid grid-cols-2 gap-4">
+          <div class="border border-yellow-400/50 p-4 text-left">
+            <p class="text-[10px] text-yellow-400 font-bold uppercase mb-1">Current Node</p>
+            <p class="font-mono text-sm">STATION_04_WEST</p>
+          </div>
+          <div class="border border-yellow-400/50 p-4 text-left">
+            <p class="text-[10px] text-yellow-400 font-bold uppercase mb-1">Throughput</p>
+            <p class="font-mono text-sm">1.22 GB/SEC</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Records Table -->
+    <section class="lg:col-span-3 border-2 border-yellow-400 p-0 flex flex-col h-[500px]">
+      <div class="bg-yellow-400 text-black p-2 font-headline-md text-sm font-black uppercase tracking-widest flex items-center gap-2">
+        <span class="material-symbols-outlined">database</span>
+        RECORDS
+      </div>
+      <div class="flex-1 overflow-auto p-4">
+        <table class="w-full text-left text-xs font-mono text-primary">
+          <thead>
+            <tr class="border-b-2 border-yellow-400/30 text-yellow-400">
+              <th class="pb-2">ENTRY ID</th>
+              <th class="pb-2">RESULT</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dashed divide-yellow-400/30">
+            <tr><td class="py-3">#0xFA82</td><td class="py-3 text-green-400">SUCCESS</td></tr>
+            <tr><td class="py-3">#0xFA83</td><td class="py-3 text-green-400">SUCCESS</td></tr>
+            <tr><td class="py-3">#0xFA84</td><td class="py-3 text-error">FAIL_02</td></tr>
+            <tr><td class="py-3">#0xFA85</td><td class="py-3 text-green-400">SUCCESS</td></tr>
+            <tr><td class="py-3">#0xFA86</td><td class="py-3 text-green-400">SUCCESS</td></tr>
+            <tr><td class="py-3">#0xFA87</td><td class="py-3 text-green-400">SUCCESS</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- Terminal Log Section -->
+  <section class="mt-8 border-4 border-yellow-400 bg-black">
+    <div class="bg-yellow-400 text-black px-4 py-1 text-[10px] font-black uppercase flex justify-between items-center">
+      <span>ACTIVITY LOG</span>
+      <span>MONITOR_01_ACTIVE</span>
+    </div>
+    <div id="logArea" class="h-32 p-4 font-mono text-[11px] text-primary overflow-y-auto leading-relaxed">
+      <p>&gt; [00:11:02] INITIALIZING STATION 04 SEQUENCE...</p>
+      <p>&gt; [00:11:05] HANDSHAKE ESTABLISHED WITH CENTRAL NODE</p>
+      <p>&gt; [00:11:10] PACKET PKT_9077 PROCESSED SUCCESSFULLY.</p>
+      <p>&gt; [00:12:15] INCOMING DATA PACKET PKT_9082 DETECTED IN INBOX</p>
+      <p class="text-yellow-400">&gt; [00:14:22] PACKET PKT_9088 MOVED TO ACTIVE QUEUE</p>
+      <p>&gt; [00:15:45] SYSTEM IDLE. AWAITING PROCESS COMMAND.</p>
+      <p class="animate-pulse">_</p>
+    </div>
+  </section>
+
 </main>
-<!-- Footer Component -->
-<footer class="w-full py-12 bg-surface-container border-t-4 border-on-background">
-<div class="max-w-[1200px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="flex flex-col items-center md:items-start gap-2">
-<span class="text-2xl font-black uppercase tracking-tighter text-on-background font-display-lg bg-on-background text-primary-container px-2">Nexus</span>
-<p class="font-label-mono text-xs text-on-surface-variant uppercase">© 2024 Nexus Inc. Good Food. Fast Code.</p>
-</div>
-<div class="flex items-center gap-8 font-label-bold uppercase text-xs">
-<a class="text-on-background hover:underline decoration-4" href="#">Privacy Policy</a>
-<a class="text-on-background hover:underline decoration-4" href="#">Terms of Service</a>
-<a class="text-on-background hover:underline decoration-4" href="#">Cookie Policy</a>
-</div>
-</div>
+
+<!-- Footer -->
+<footer class="bg-black text-yellow-400 font-['Space_Grotesk'] text-[10px] tracking-[0.2em] uppercase fixed bottom-0 w-full h-10 flex justify-between items-center px-8 z-50 overflow-hidden border-t-4 border-yellow-400">
+  <div class="text-yellow-400">©1954 YELLOW SIGN INDUSTRIAL | ENCRYPTED LINK</div>
+  <div class="flex gap-6">
+    <a class="text-stone-300 hover:text-yellow-400" href="#">PRIVACY</a>
+    <a class="text-stone-300 hover:text-yellow-400" href="#">MAINTENANCE</a>
+    <a class="text-stone-300 hover:text-yellow-400" href="#">LOGOUT</a>
+  </div>
 </footer>
-</body></html>
+
+<script>
+"use strict";
+
+const API = 'HTTPS';
+// This is where the API gateway address goes.
+
+// inbox API calls
+
+async function loadInbox() {
+    const res = await fetch(`${API}/inbox`);
+    const files = await res.json();
+    renderInbox(files);
+}
+
+async function uploadFile(file) {
+    const form = new FormData();
+    form.append('file', file);
+    await fetch(`${API}/inbox`, {
+        // implied fetch details
+    });
+}
+
+async function deleteFile(fileName) {
+    await fetch(`${API}/inbox?fileName=${encodeURIComponent(fileName)}`, {
+        method: 'DELETE'
+    });
+}
+
+function renderInbox(files) {
+    const inboxList = document.querySelector('#inboxList');
+    inboxList.innerHTML = '';
+
+    files.forEach(fileName => {
+        const tr = document.createElement('tr');
+        tr.className = 'group eg 3d 3d 3d';
+        tr.innerHTML = `<td class="py4 px4 text">${fileName}</td><td class="px4 text-right"><button onclick="deleteFile('${fileName}')" class="text-error transition transform">close</button></td>`;
+        inboxList.appendChild(tr);
+    });
+}
+
+const fileInput = document.createElement('input');
+fileInput.type = 'file';
+fileInput.accept = 'image/*, .jpeg, .png';
+fileInput.style.display = 'none';
+document.body.appendChild(fileInput);
+
+document.getElementById('uploadButton').addEventListener('click', () => {
+    fileInput.click();
+});
+
+fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) {
+        uploadFile(fileInput.files[0]);
+    }
+});
+
+document.getElementById('processButton').addEventListener('click', () => {
+
+});
+
+const log = document.getElementById('logArea');
+const p = document.createElement('p');
+p.className = 'text FFD MT-1';
+p.innerText = new Date().toLocaleString();
+log.appendChild(p);
+</script>
+
+</body>
+</html>

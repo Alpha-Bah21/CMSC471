@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 import json
 import os
-from time import timezone
+
 def handler(event, context):
     # Log the event argument for debugging and for use in local development.
     print(json.dumps(event))
@@ -15,7 +15,7 @@ def handler(event, context):
         "body": json.dumps({
             "status": "ok",
             "service": "cmsc471-website",
-            "timestamp": datetime.now( datetime.timezone.utc).isoformat(),
-            "region": os.environ.get("AWS_REGION","us-east-1"),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "region": os.environ.get("AWS_REGION", "us-east-1"),
         }),
     }
