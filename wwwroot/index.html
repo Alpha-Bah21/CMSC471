@@ -224,17 +224,11 @@
         <table class="w-full text-left text-xs font-mono text-primary">
           <thead>
             <tr class="border-b-2 border-yellow-400/30 text-yellow-400">
-              <th class="pb-2">ENTRY ID</th>
-              <th class="pb-2">RESULT</th>
+              <th class="pb-2">ITEM</th>
+              <th class="pb-2">ACTION</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-dashed divide-yellow-400/30">
-            <tr><td class="py-3">#0xFA82</td><td class="py-3 text-green-400">SUCCESS</td></tr>
-            <tr><td class="py-3">#0xFA83</td><td class="py-3 text-green-400">SUCCESS</td></tr>
-            <tr><td class="py-3">#0xFA84</td><td class="py-3 text-error">FAIL_02</td></tr>
-            <tr><td class="py-3">#0xFA85</td><td class="py-3 text-green-400">SUCCESS</td></tr>
-            <tr><td class="py-3">#0xFA86</td><td class="py-3 text-green-400">SUCCESS</td></tr>
-            <tr><td class="py-3">#0xFA87</td><td class="py-3 text-green-400">SUCCESS</td></tr>
+          <tbody id="recordsTable" class="divide-y divide-dashed divide-yellow-400/30">
           </tbody>
         </table>
       </div>
@@ -272,9 +266,11 @@
 
 <script>
 "use strict";
-let selectedFile = null;
+
 const API = 'https://s0rqwisb89.execute-api.us-east-1.amazonaws.com/Prod';
 // This is where the API gateway address goes.
+
+let selectedFile = null;
 
 // inbox API calls
 
@@ -345,6 +341,17 @@ fileInput.accept = 'image/*, .jpeg, .png';
 fileInput.style.display = 'none';
 document.body.appendChild(fileInput);
 
+document.getElementById('uploadButton').addEventListener('click', () => {
+    fileInput.click();
+});
+
+fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) {
+        uploadFile(fileInput.files[0]);
+        fileInput.value = '';
+    }
+});
+
 document.getElementById('processButton').addEventListener('click', async () => {
     if (!selectedFile) return;
 
@@ -370,19 +377,9 @@ document.getElementById('processButton').addEventListener('click', async () => {
 
         if (job.status === 'SUCCEEDED' || job.status === 'FAILED') {
             clearInterval(pollInterval);
+            await loadRecords();
         }
     }, 2000);
-});
-
-fileInput.addEventListener('change', () => {
-    if (fileInput.files[0]) {
-        uploadFile(fileInput.files[0]);
-        fileInput.value = '';
-    }
-});
-
-document.getElementById('processButton').addEventListener('click', () => {
-
 });
 
 const log = document.getElementById('logArea');
@@ -391,25 +388,25 @@ p.className = 'text-yellow-400';
 p.innerText = '> [' + new Date().toLocaleString() + '] SYSTEM INITIALIZED';
 log.appendChild(p);
 
-// Load inbox on page load
-// Load inbox and records on page load
-loadInbox();
-loadRecords();
-
+// Records API calls
 async function loadRecords() {
-    const res = await fetch(`${API}/api/records`);
-    const rows = await res.json();
-    renderRecords(rows);
+    try {
+        const res = await fetch(`${API}/api/records`);
+        const rows = await res.json();
+        renderRecords(rows);
+    } catch (err) {
+        console.error('Error loading records:', err);
+    }
 }
 
 function renderRecords(rows) {
-    const tbody = document.querySelector('#recordsTable tbody');
+    const tbody = document.querySelector('#recordsTable');
     tbody.innerHTML = '';
 
     if (rows.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="3" class="py-6 text-center italic text-sm text-gray-500">
+                <td colspan="2" class="py-6 text-center italic text-sm text-yellow-400/50">
                     No records yet. Process an image to see results.
                 </td>
             </tr>
@@ -420,7 +417,7 @@ function renderRecords(rows) {
     rows.forEach(row => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td class="py-3 text-green-400">${row.time || ''}</td>
+            <td class="py-3 text-green-400">${row.item || ''}</td>
             <td class="py-3 text-right">
                 <button onclick="deleteRecord('${row.id}')" class="text-red-400 hover:text-red-200 transition">close</button>
             </td>
@@ -431,8 +428,12 @@ function renderRecords(rows) {
 
 async function deleteRecord(id) {
     await fetch(`${API}/api/records/${id}`, { method: 'DELETE' });
-    loadRecords();
+    await loadRecords();
 }
+
+// Load inbox and records on page load
+loadInbox();
+loadRecords();
 </script>
 
 </body>

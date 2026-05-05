@@ -194,6 +194,17 @@ Resources:
       KeySchema:
         - AttributeName: jobId
           KeyType: HASH
+  RecordsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${AWS::StackName}-records
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
   LSubmit:
     Type: AWS::Serverless::Function
     Properties:
@@ -253,6 +264,41 @@ Resources:
     UpdateReplacePolicy: Delete
     Properties:
       LogGroupName: !Sub /aws/lambda/${LPoll}
+  LRecords:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: !Sub
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: LRecords
+      CodeUri: src/l_records
+      Handler: l_records.handler
+      Runtime: python3.13
+      Role: !Ref LabRoleArn
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Environment:
+        Variables:
+          RECORDS_TABLE: !Ref RecordsTable
+      Events:
+        GetRecords:
+          Type: Api
+          Properties:
+            Path: /api/records
+            Method: get
+            RestApiId: !Ref Api
+        DeleteRecord:
+          Type: Api
+          Properties:
+            Path: /api/records/{id}
+            Method: delete
+            RestApiId: !Ref Api
+  LRecordsLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${LRecords}
   L1Fetch:
     Type: AWS::Serverless::Function
     Properties:
@@ -313,9 +359,7 @@ Resources:
       Environment:
         Variables:
           JOB_TABLE: !Ref JobsTable
-          DB_ARN: ''
-          DB_SECRET: ''
-          DB_NAME: ''
+          RECORDS_TABLE: !Ref RecordsTable
   L3SaveLogGroup:
     Type: AWS::Logs::LogGroup
     DeletionPolicy: Delete

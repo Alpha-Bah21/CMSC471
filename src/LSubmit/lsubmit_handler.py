@@ -35,9 +35,9 @@ def handler(event, context):
     )
     
     return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Origin': '*'
-        },
-        'body': job_id
-    }
+    'statusCode': 200,
+    'headers': {
+        'Access-Control-Allow-Origin': '*'
+    },
+    'body': json.dumps({'jobId': job_id})
+}

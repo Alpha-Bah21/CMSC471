@@ -1,33 +1,28 @@
 import os
 import boto3
+import uuid
+import json
+from datetime import datetime, timezone
 
-rds_data = boto3.client('rds-data')
 dynamodb = boto3.resource('dynamodb')
 
 def handler(event, context):
     job_id = event['jobId']
     items = event['items']
     
-    db_arn = os.environ['DB_ARN']
-    secret_arn = os.environ['DB_SECRET']
-    database = os.environ['DB_NAME']
+    records_table = dynamodb.Table(os.environ['RECORDS_TABLE'])
+    job_table = dynamodb.Table(os.environ['JOB_TABLE'])
     
     for item in items:
-        rds_data.execute_statement(
-            resourceArn=db_arn,
-            secretArn=secret_arn,
-            database=database,
-            sql='INSERT INTO shopping_list (jobId, item) VALUES (:jobId, :item)',
-            parameters=[
-                {'name': 'jobId', 'value': {'stringValue': job_id}},
-                {'name': 'item', 'value': {'stringValue': item}}
-            ]
-        )
-        
-    job_table = os.environ['JOB_TABLE']
-    table = dynamodb.Table(job_table)
+        record = {
+            'id': str(uuid.uuid4()),
+            'job_id': job_id,
+            'item': item,
+            'created_at': datetime.now(timezone.utc).isoformat()
+        }
+        records_table.put_item(Item=record)
     
-    table.update_item(
+    job_table.update_item(
         Key={'jobId': job_id},
         UpdateExpression='SET #s = :s, #m = :m',
         ExpressionAttributeNames={
